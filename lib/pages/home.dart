@@ -1,6 +1,7 @@
 import 'package:analista_falencia_pessoal/pages/expense_list.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/dialog_tags_list.dart';
 import 'configs/settings_page.dart';
 
 class Home extends StatefulWidget {
@@ -38,6 +39,18 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: const Text('Analista de Falência Pessoal'),
         actions: [
+          IconButton(
+              icon: const Icon(
+                Icons.local_offer_outlined,
+              ),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return const DialogTagsList();
+                    });
+              }),
+          const SizedBox(width: 8,),
           IconButton(
               icon: const Icon(
                 Icons.settings_outlined,
