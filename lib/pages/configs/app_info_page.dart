@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../util/changelog.dart';
 
 class AppInfoPage extends StatelessWidget {
   const AppInfoPage({Key? key}) : super(key: key);
 
   _launchGithub()  {
-    const url = '';
+    const url = 'https://github.com/Fschmatz/analista_falencia_pessoal_mobile';
     launch(url);
   }
 
@@ -92,7 +91,7 @@ class AppInfoPage extends StatelessWidget {
           const ListTile(
             leading: Icon(Icons.messenger_outline),
             title: Text(
-              'For every minute spent organizing, an hour is earned.',
+              'Beware of little expenses. A small leak will sink a great ship.',
               style: TextStyle(fontSize: 16),
             ),
           ),

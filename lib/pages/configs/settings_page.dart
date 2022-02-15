@@ -33,7 +33,7 @@ class _SettingsPageState extends State<SettingsPage> {
           children: <Widget>[
             Card(
               margin: const EdgeInsets.fromLTRB(16, 20, 16, 25),
-              color: Theme.of(context).colorScheme.secondary,
+              color: Theme.of(context).colorScheme.secondary.withOpacity(0.9),
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(12)),
               ),
@@ -41,7 +41,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 title: Text(
                   Changelog.appName + " " + Changelog.appVersion,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 17.5),
+                  style: const TextStyle(fontSize: 16,fontWeight: FontWeight.w600),
                 ),
               ),
             ),

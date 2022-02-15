@@ -1,29 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../db/tag_dao.dart';
+import '../../classes/category.dart';
+import '../../db/category_dao.dart';
 import '../../util/block_picker_alt.dart';
+import '../../util/utils_functions.dart';
 import '../../widgets/dialog_alert_error.dart';
 
-class NewTag extends StatefulWidget {
-  @override
-  _NewTagState createState() => _NewTagState();
+class EditCategory extends StatefulWidget {
 
-  const NewTag({Key? key}) : super(key: key);
+  @override
+  _EditCategoryState createState() => _EditCategoryState();
+
+  Category tag;
+  EditCategory({Key? key,required this.tag}) : super(key: key);
 }
 
-class _NewTagState extends State<NewTag> {
+class _EditCategoryState extends State<EditCategory> {
 
-  final tags = TagDao.instance;
+  final _categories = CategoryDao.instance;
   TextEditingController customControllerName = TextEditingController();
   Color pickerColor = const Color(0xFFe35b5b);
   Color currentColor = const Color(0xFFe35b5b);
 
-  void _saveTag() async {
+  @override
+  void initState() {
+    super.initState();
+    customControllerName.text = widget.tag.name;
+    currentColor = parseColorFromDb(widget.tag.color);
+    pickerColor = parseColorFromDb(widget.tag.color);
+  }
+
+  void _updateTag() async {
     Map<String, dynamic> row = {
-      TagDao.columnName: customControllerName.text,
-      TagDao.columnColor: currentColor.toString(),
+      CategoryDao.columnId: widget.tag.id_category,
+      CategoryDao.columnName: customControllerName.text,
+      CategoryDao.columnColor: currentColor.toString(),
     };
-    final id = await tags.insert(row);
+    final update = await _categories.update(row);
   }
 
   String checkForErrors() {
@@ -33,7 +46,6 @@ class _NewTagState extends State<NewTag> {
     }
     return errors;
   }
-
 
   //COLORS
   void changeColor(Color color) {
@@ -48,7 +60,7 @@ class _NewTagState extends State<NewTag> {
       ),
       onPressed: () {
         setState(() =>
-            {currentColor = pickerColor});
+        {currentColor = pickerColor});
         Navigator.of(context).pop();
       },
     );
@@ -59,13 +71,13 @@ class _NewTagState extends State<NewTag> {
       ),
       title: const Text(
         "Select Color : ", //
-        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
       content: SingleChildScrollView(
           child: BlockPicker(
-        pickerColor: currentColor,
-        onColorChanged: changeColor,
-      )),
+            pickerColor: currentColor,
+            onColorChanged: changeColor,
+          )),
       actions: [
         okButton,
       ],
@@ -93,7 +105,7 @@ class _NewTagState extends State<NewTag> {
               onPressed: () async {
                 String errors = checkForErrors();
                 if (errors.isEmpty) {
-                  _saveTag();
+                  _updateTag();
                   Navigator.of(context).pop();
                 } else {
                   showDialog(
@@ -126,7 +138,6 @@ class _NewTagState extends State<NewTag> {
               Icons.notes_outlined,
             ),
             title: TextField(
-              autofocus: true,
               minLines: 1,
               maxLength: 30,
               maxLengthEnforcement: MaxLengthEnforcement.enforced,

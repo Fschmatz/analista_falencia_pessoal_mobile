@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import '../classes/tag.dart';
-import '../db/tag_dao.dart';
-import '../pages/tags/edit_tag.dart';
-import '../pages/tags/new_tag.dart';
+import '../classes/category.dart';
+import '../db/category_dao.dart';
+import '../pages/tags/edit_category.dart';
+import '../pages/tags/new_category.dart';
 import '../util/utils_functions.dart';
 
-class DialogTagsList extends StatefulWidget {
-  const DialogTagsList({Key? key}) : super(key: key);
+class DialogCategoriesList extends StatefulWidget {
+  const DialogCategoriesList({Key? key}) : super(key: key);
 
   @override
-  _DialogTagsListState createState() => _DialogTagsListState();
+  _DialogCategoriesListState createState() => _DialogCategoriesListState();
 }
 
-class _DialogTagsListState extends State<DialogTagsList> {
-  bool loadingTags = true;
-  final tags = TagDao.instance;
-  List<Map<String, dynamic>> _tagsList = [];
+class _DialogCategoriesListState extends State<DialogCategoriesList> {
+  bool loadingCategories = true;
+  final _categories = CategoryDao.instance;
+  List<Map<String, dynamic>> _categoriesList = [];
 
   @override
   void initState() {
@@ -24,14 +24,14 @@ class _DialogTagsListState extends State<DialogTagsList> {
   }
 
   Future<void> _delete(int id_tag) async {
-    final deleted = await tags.delete(id_tag);
+    final deleted = await _categories.delete(id_tag);
   }
 
-  Future<void> getTags() async {
-    var resp = await tags.queryAllRows();
+  Future<void> getCategories() async {
+    var resp = await _categories.queryAllRows();
     setState(() {
-      _tagsList = resp;
-      loadingTags = false;
+      _categoriesList = resp;
+      loadingCategories = false;
     });
   }
 
@@ -45,7 +45,7 @@ class _DialogTagsListState extends State<DialogTagsList> {
             color: Theme.of(context).colorScheme.secondary),
       ),
       onPressed: () {
-        _delete(idTag).then((value) => getTags());
+        _delete(idTag).then((value) => getCategories());
         Navigator.of(context).pop();
       },
     );
@@ -84,12 +84,12 @@ class _DialogTagsListState extends State<DialogTagsList> {
       ),
       contentPadding: const EdgeInsets.all(0),
       titlePadding: const EdgeInsets.fromLTRB(16, 25, 0, 24),
-      title: const Text('Tags'),
+      title: const Text('Categories'),
       actionsAlignment: MainAxisAlignment.spaceBetween,
       actions: [
         TextButton(
           child: const Text(
-            "New Tag",
+            "New Category",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
           onPressed: () {
@@ -97,9 +97,9 @@ class _DialogTagsListState extends State<DialogTagsList> {
             Navigator.push(
                 context,
                 MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const NewTag(),
+                  builder: (BuildContext context) => const NewCategory(),
                   fullscreenDialog: true,
-                )).then((value) => getTags());
+                )).then((value) => getCategories());
           },
         ),
         TextButton(
@@ -117,17 +117,17 @@ class _DialogTagsListState extends State<DialogTagsList> {
         width: 350.0,
         child: ListView.builder(
           shrinkWrap: true,
-          itemCount: _tagsList.length,
+          itemCount: _categoriesList.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
               contentPadding: const EdgeInsets.fromLTRB(16, 0, 5, 0),
               leading: Icon(Icons.circle,
-                  color: parseColorFromDb(_tagsList[index]['color'])),
-              title: Text(_tagsList[index]['name']),
+                  color: parseColorFromDb(_categoriesList[index]['color'])),
+              title: Text(_categoriesList[index]['name']),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  _tagsList.length > 1
+                  _categoriesList.length > 1
                       ? IconButton(
                           icon: Icon(
                             Icons.delete_outlined,
@@ -139,7 +139,7 @@ class _DialogTagsListState extends State<DialogTagsList> {
                           ),
                           onPressed: () {
                             showAlertDialogOkDelete(
-                                context, _tagsList[index]['id_tag']);
+                                context, _categoriesList[index]['id_tag']);
                           })
                       : const SizedBox.shrink(),
                   const SizedBox(
@@ -158,15 +158,15 @@ class _DialogTagsListState extends State<DialogTagsList> {
                         Navigator.push(
                             context,
                             MaterialPageRoute<void>(
-                              builder: (BuildContext context) => EditTag(
-                                tag: Tag(
-                                  _tagsList[index]['id_tag'],
-                                  _tagsList[index]['name'],
-                                  _tagsList[index]['color'],
+                              builder: (BuildContext context) => EditCategory(
+                                tag: Category(
+                                  _categoriesList[index]['id_tag'],
+                                  _categoriesList[index]['name'],
+                                  _categoriesList[index]['color'],
                                 ),
                               ),
                               fullscreenDialog: true,
-                            )).then((value) => getTags());
+                            )).then((value) => getCategories());
                       }),
                 ],
               ),

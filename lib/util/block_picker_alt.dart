@@ -7,22 +7,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/src/utils.dart';
 
 const List<Color> _defaultColors = [
-  Color(0xffe35b5b),
-  Color(0xFFdb6e8e),
-  Color(0xFFB08EFD),
+  Color(0xfff66161),
+  Color(0xffec7095),
+  Color(0xFFAB87FD),
   Color(0xffa28bc9),
-  Color(0xFF8D9EFE),
-  Color(0xff699ed9),
-  Color(0xff69c0d7),
-  Color(0xff5dcbab),
-  Color(0xFF55c985),
-  Color(0xFF67C263),
-  Color(0xff8ccb5d),
+  Color(0xFF8597FC),
+  Color(0xff6ba5e5),
+  Color(0xff69cae3),
+  Color(0xff57cdaa),
+  Color(0xff4fc781),
+  Color(0xFF62C65E),
+  Color(0xff8ace57),
   Color(0xFFedd353),
-  Color(0xfff5a967),
-  Color(0xFFf2825e),
-  Color(0xFF6d848f),
-  Color(0xFF8E6D6D),
+  Color(0xfff3a25b),
+  Color(0xfff17b54),
+  Color(0xff607a87),
+  Color(0xFF7F5C5C),
 ];
 
 typedef PickerLayoutBuilder = Widget Function(

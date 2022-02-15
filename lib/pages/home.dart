@@ -1,7 +1,8 @@
-import 'package:analista_falencia_pessoal/pages/expense_list.dart';
+import 'package:analista_falencia_pessoal/pages/expense_list_page.dart';
+import 'package:analista_falencia_pessoal/pages/statistics_page.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/dialog_tags_list.dart';
+import '../widgets/dialog_categories_list.dart';
 import 'configs/settings_page.dart';
 
 class Home extends StatefulWidget {
@@ -24,10 +25,10 @@ class _HomeState extends State<Home> {
 
   void appStartFunctions() async {
     _tabs = [
-      ExpenseList(
+      ExpenseListPage(
         key: UniqueKey(),
       ),
-      ExpenseList(
+      StatisticsPage(
         key: UniqueKey(),
       ),
     ];
@@ -47,7 +48,7 @@ class _HomeState extends State<Home> {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return const DialogTagsList();
+                      return const DialogCategoriesList();
                     });
               }),
           const SizedBox(width: 8,),
@@ -66,7 +67,7 @@ class _HomeState extends State<Home> {
         ],
       ),
       body:  _tabs[_currentTabIndex],
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: _currentTabIndex == 0 ? FloatingActionButton(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
@@ -77,7 +78,7 @@ class _HomeState extends State<Home> {
           Icons.add,
           color: Colors.black87,
         ),
-      ),
+      ) : null,
 
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentTabIndex,

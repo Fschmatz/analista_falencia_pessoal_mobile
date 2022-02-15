@@ -3,13 +3,13 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 
-class TagDao {
+class CategoryDao {
 
   static const _databaseName = 'Analista.db';
   static const _databaseVersion = 1;
 
-  static const table = 'tags';
-  static const columnId = 'id_tag';
+  static const table = 'categories';
+  static const columnId = 'id_category';
   static const columnName = 'name';
   static const columnColor = 'color';
 
@@ -17,8 +17,8 @@ class TagDao {
   Future<Database> get database async =>
       _database ??= await initDatabase();
 
-  TagDao._privateConstructor();
-  static final TagDao instance = TagDao._privateConstructor();
+  CategoryDao._privateConstructor();
+  static final CategoryDao instance = CategoryDao._privateConstructor();
 
   Future<Database> initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
