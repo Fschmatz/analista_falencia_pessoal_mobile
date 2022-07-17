@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'expense/new_expense.dart';
 
 class ExpenseListPage extends StatefulWidget {
   const ExpenseListPage({Key? key}) : super(key: key);
@@ -10,9 +13,21 @@ class ExpenseListPage extends StatefulWidget {
 class _ExpenseListPageState extends State<ExpenseListPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('''
+    return Scaffold(
+        body: Center(child: Text('''
 Bartender please, fill my glass for me
 With the wine you gave Jesus that set him free
-After three days in the ground'''));
+After three days in the ground''')),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Get.to(
+              () => NewExpense(),
+            );
+          },
+          child: const Icon(
+            Icons.add,
+            color: Colors.black87,
+          ),
+        ));
   }
 }

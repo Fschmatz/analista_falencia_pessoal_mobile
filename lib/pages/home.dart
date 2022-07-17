@@ -1,9 +1,13 @@
 import 'package:analista_falencia_pessoal/pages/expense_list_page.dart';
 import 'package:analista_falencia_pessoal/pages/statistics_page.dart';
+import 'package:analista_falencia_pessoal/pages/tags/tags_manager.dart';
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../controller/bottom_navigation_controller.dart';
 import '../widgets/dialog_categories_list.dart';
-import 'configs/settings_page.dart';
+import 'configs/settings.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -13,9 +17,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _currentTabIndex = 0;
   List<Widget> _tabs = [];
-
+  BottomNavigationController bottomNavigationController =
+      Get.put(BottomNavigationController());
 
   @override
   void initState() {
@@ -37,74 +41,78 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Analista de Falência Pessoal'),
-        actions: [
-          IconButton(
-              icon: const Icon(
-                Icons.local_offer_outlined,
-              ),
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return const DialogCategoriesList();
-                    });
-              }),
-          const SizedBox(width: 8,),
-          IconButton(
-              icon: const Icon(
-                Icons.settings_outlined,
-              ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const SettingsPage(),
-                      fullscreenDialog: true,
-                    ));
-              }),
-        ],
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              title: const Text('Analista de Falência Pessoal'),
+              pinned: false,
+              floating: true,
+              snap: true,
+              actions: [
+
+                PopupMenuButton<int>(
+                    icon: const Icon(Icons.more_vert_outlined),
+                    itemBuilder: (BuildContext context) =>
+                    <PopupMenuItem<int>>[
+                      const PopupMenuItem<int>(
+                          value: 0, child: Text('Manage tags')),
+                      const PopupMenuItem<int>(
+                          value: 1, child: Text('Settings')),
+                    ],
+                    onSelected: (int value) {
+                      if (value == 0) {
+                        Get.to(() => TagsManager());
+                      } else if (value == 1) {
+                        Get.to(() => Settings());
+
+                      }
+                    })
+
+
+
+              ],
+            ),
+          ];
+        },
+        body: Obx(
+          () => PageTransitionSwitcher(
+            transitionBuilder: (child, animation, secondaryAnimation) =>
+                FadeThroughTransition(
+              fillColor: Theme.of(context).scaffoldBackgroundColor,
+              animation: animation,
+              secondaryAnimation: secondaryAnimation,
+              child: child,
+            ),
+            child: _tabs[bottomNavigationController.currentIndex.value],
+          ),
+        ),
       ),
-      body:  _tabs[_currentTabIndex],
-      floatingActionButton: _currentTabIndex == 0 ? FloatingActionButton(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(16)),
-        ),
-        onPressed: () {
-
-        },
-        child: const Icon(
-          Icons.add,
-          color: Colors.black87,
-        ),
-      ) : null,
-
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _currentTabIndex,
-        onDestinationSelected: (index) {
-          setState(() {
-            _currentTabIndex = index;
-          });
-        },
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.payments_outlined),
-            selectedIcon: Icon(
-              Icons.payments,
-              color: Colors.black87,
+      bottomNavigationBar: Obx(
+        () => NavigationBar(
+          selectedIndex: bottomNavigationController.currentIndex.value,
+          onDestinationSelected: (index) {
+            bottomNavigationController.changeIndex(index);
+          },
+          destinations: const [
+            NavigationDestination(
+              icon: Icon(Icons.payments_outlined),
+              selectedIcon: Icon(
+                Icons.payments,
+                color: Colors.black87,
+              ),
+              label: 'Month Expenses',
             ),
-            label: 'Month Expenses',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.assessment_outlined),
-            selectedIcon: Icon(
-              Icons.assessment,
-              color: Colors.black87,
+            NavigationDestination(
+              icon: Icon(Icons.assessment_outlined),
+              selectedIcon: Icon(
+                Icons.assessment,
+                color: Colors.black87,
+              ),
+              label: 'Statistics',
             ),
-            label: 'Statistics',
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
