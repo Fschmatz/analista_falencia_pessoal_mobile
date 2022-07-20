@@ -82,11 +82,11 @@ ThemeData dark = ThemeData(
       titleMedium: TextStyle(fontWeight: FontWeight.w400),
     ),
     brightness: Brightness.dark,
-    primaryColor: const Color(0xFF202126),
-    scaffoldBackgroundColor: const Color(0xFF202126),
-    canvasColor: const Color(0xFF202126),
+    primaryColor: const Color(0xFF1A1B1F),
+    scaffoldBackgroundColor: const Color(0xFF1A1B1F),
+    canvasColor: const Color(0xFF1A1B1F),
     colorScheme: const ColorScheme.dark(
-        background: Color(0xFF202126),
+        background: Color(0xFF1A1B1F),
         primary: Color(0xFFA8C7FF),
         secondary: Color(0xFFA8C7FF)),
     popupMenuTheme: const PopupMenuThemeData(
@@ -97,15 +97,15 @@ ThemeData dark = ThemeData(
       color: Color(0xFF303136),
     ),
     appBarTheme: const AppBarTheme(
-      surfaceTintColor: Color(0xFF202126),
-      color: Color(0xFF202126),
+      surfaceTintColor: Color(0xFF1A1B1F),
+      color: Color(0xFF1A1B1F),
     ),
     cardTheme: const CardTheme(
-      surfaceTintColor: Color(0xFF2C2C2D),
-      color: Color(0xFF2C2C2D),
+      surfaceTintColor: Color(0xFF292A2F),
+      color: Color(0xFF292A2F),
     ),
     dialogTheme: const DialogTheme(
-      backgroundColor: Color(0xFF202126),
+      backgroundColor: Color(0xFF1A1B1F),
     ),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFF353537),
@@ -130,19 +130,19 @@ ThemeData dark = ThemeData(
       selectedLabelStyle: TextStyle(color: Color(0xFFA8C7FF)),
       showSelectedLabels: true,
       showUnselectedLabels: false,
-      backgroundColor: Color(0xFF202126),
+      backgroundColor: Color(0xFF1A1B1F),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Color(0xFFA8C7FF),
     ),
     navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: const Color(0xFF202126),
+        backgroundColor: const Color(0xFF1A1B1F),
         indicatorColor: const Color(0xFFA8C7FF),
         iconTheme: MaterialStateProperty.all(const IconThemeData(
           color: Color(0xFFEAEAEA),
         )),
         labelTextStyle: MaterialStateProperty.all(const TextStyle(
             color: Color(0xFFEAEAEA), fontWeight: FontWeight.w500))),
-    bottomAppBarColor: const Color(0xFF202126),
+    bottomAppBarColor: const Color(0xFF1A1B1F),
     bottomSheetTheme:
-        const BottomSheetThemeData(modalBackgroundColor: Color(0xFF202126)));
+        const BottomSheetThemeData(modalBackgroundColor: Color(0xFF1A1B1F)));

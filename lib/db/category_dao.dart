@@ -9,7 +9,7 @@ class CategoryDao {
   static const _databaseVersion = 1;
 
   static const table = 'categories';
-  static const columnId = 'id_category';
+  static const columnId = 'idCategory';
   static const columnName = 'name';
   static const columnColor = 'color';
 
@@ -61,7 +61,7 @@ class CategoryDao {
   Future<List<Map<String, dynamic>>> getTags(int idTask) async {
     Database db = await instance.database;
     return await db.rawQuery('''    
-          SELECT tg.id_tag, tg.name, tg.color FROM tags tg,tasks_tags tt 
+          SELECT tg.id_tag, tg.name, tg.color FROM category tg,tasks_tags tt 
           WHERE tt.id_task = $idTask AND tg.id_tag=tt.id_tag 
           GROUP BY tg.id_tag     
         ''');
@@ -70,7 +70,7 @@ class CategoryDao {
   Future<List<Map<String, dynamic>>> getTagsByName(int idTask) async {
     Database db = await instance.database;
     return await db.rawQuery('''    
-          SELECT tg.id_tag, tg.name, tg.color FROM tags tg,tasks_tags tt 
+          SELECT tg.id_tag, tg.name, tg.color FROM category tg,tasks_tags tt 
           WHERE tt.id_task = $idTask AND tg.id_tag=tt.id_tag 
           GROUP BY tg.id_tag    
           ORDER BY tg.name 

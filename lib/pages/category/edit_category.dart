@@ -32,7 +32,7 @@ class _EditCategoryState extends State<EditCategory> {
 
   void _updateTag() async {
     Map<String, dynamic> row = {
-      CategoryDao.columnId: widget.tag.id_category,
+      CategoryDao.columnId: widget.tag.idCategory,
       CategoryDao.columnName: customControllerName.text,
       CategoryDao.columnColor: currentColor.toString(),
     };

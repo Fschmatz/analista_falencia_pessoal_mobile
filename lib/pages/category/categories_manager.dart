@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import '../../util/utils_functions.dart';
 
-class TagsManager extends StatefulWidget {
-  TagsManager({Key? key}) : super(key: key);
+class CategoriesManager extends StatefulWidget {
+  CategoriesManager({Key? key}) : super(key: key);
 
   @override
-  _TagsManagerState createState() => _TagsManagerState();
+  _CategoriesManagerState createState() => _CategoriesManagerState();
 }
 
-class _TagsManagerState extends State<TagsManager> {
+class _CategoriesManagerState extends State<CategoriesManager> {
   bool loadingTags = true;
-  //final tags = TagDao.instance;
+  //final category = TagDao.instance;
   List<Map<String, dynamic>> _tagsList = [];
 
   @override
@@ -24,7 +24,7 @@ class _TagsManagerState extends State<TagsManager> {
   }
 
   Future<void> getTags() async {
-    var resp = await tags.queryAllRowsByName();
+    var resp = await category.queryAllRowsByName();
     setState(() {
       _tagsList = resp;
       loadingTags = false;

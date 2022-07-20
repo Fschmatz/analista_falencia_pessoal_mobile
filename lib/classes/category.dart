@@ -1,8 +1,8 @@
 class Category{
 
-  int id_category;
+  int idCategory;
   String name;
   String color;
 
-  Category(this.id_category, this.name, this.color);
+  Category(this.idCategory, this.name, this.color);
 }

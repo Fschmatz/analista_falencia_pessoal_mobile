@@ -1,4 +1,3 @@
-/*
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -25,76 +24,69 @@ class DbCreator {
 
   Future _onCreate(Database db, int version) async {
 
-    CurrentTodo().saveToPrefs(1);
-
     await db.execute('''    
-           CREATE TABLE todos (
-             id_todo INTEGER PRIMARY KEY,
-             name TEXT NOT NULL           
+           CREATE TABLE categories (
+             idCategory INTEGER PRIMARY KEY,
+             name TEXT NOT NULL,
+             color TEXT NOT NULL             
           )          
           ''');
 
     await db.execute('''    
-           CREATE TABLE tasks (
-             id_task INTEGER PRIMARY KEY,
-             title TEXT NOT NULL,
-             note TEXT,
-             state INTEGER NOT NULL,
-             id_todo INTEGER NOT NULL
+           CREATE TABLE expenses (
+             idExpense INTEGER PRIMARY KEY,
+             name TEXT NOT NULL,
+             value REAL NOT NULL,
+             date TEXT NOT NULL
           )          
           ''');
 
-    await db.execute('''       
-          CREATE TABLE tags (
-            id_tag INTEGER PRIMARY KEY,
-            name TEXT NOT NULL,
-            color TEXT NOT NULL
-          )
-          ''');
 
     await db.execute(''' 
-          CREATE TABLE tasks_tags (
-            id_task INTEGER NOT NULL,
-            id_tag INTEGER NOT NULL
+          CREATE TABLE expenses_categories (
+            idExpense INTEGER NOT NULL,
+            idCategory INTEGER NOT NULL
           )
           ''');
 
-    //direct inserts for tests
     Batch batch = db.batch();
 
-    batch.insert('todos', {
-      'id_todo': 1,
-      'name': 'My Todo'
+    batch.insert('expenses', {
+      'idExpense': 1,
+      'name': 'Korolev',
+      'value': 351.66,
+      'date': '25-01-1990'
     });
 
-    batch.insert('tasks', {
-      'id_task': 1,
-      'title': 'Korolev',
-      'note': 'Higher! Faster than anyone!!!',
-      'state': 0,
-      'id_todo': 1
+    batch.insert('expenses', {
+      'idExpense': 2,
+      'name': 'Zap',
+      'value': 361.66,
+      'date': '25-01-1992'
     });
 
-    batch.insert('tags', {
-      'id_tag': 1,
-      'name': 'Test',
-      'color': 'Color(0xFFedd353)'
+    batch.insert('categories', {
+      'idCategory': 1,
+      'name': 'Zap',
+      'color': 'green'
     });
 
-    batch.insert('tags', {
-      'id_tag': 2,
-      'name': 'Bug',
-      'color': 'Color(0xffe35b5b)'
+    batch.insert('categories', {
+      'idCategory': 2,
+      'name': 'BOOM!',
+      'color': 'red'
     });
 
-    batch.insert('tasks_tags', {
-      'id_task': 1,
-      'id_tag': 2
+
+
+    batch.insert('expenses_categories', {
+      'idExpense': 1,
+      'idCategory': 1
     });
 
-    batch.insert('tasks_tags', {
-      'id_task': 1,
-      'id_tag': 1
+    batch.insert('expenses_categories', {
+      'idExpense': 2,
+      'idCategory': 1
     });
 
 
@@ -103,4 +95,4 @@ class DbCreator {
   }
 }
 
-*/
+

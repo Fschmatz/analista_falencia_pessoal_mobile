@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../classes/category.dart';
 import '../db/category_dao.dart';
-import '../pages/tags/edit_category.dart';
-import '../pages/tags/new_category.dart';
+import '../pages/category/edit_category.dart';
+import '../pages/category/new_category.dart';
 import '../util/utils_functions.dart';
 
 class DialogCategoriesList extends StatefulWidget {
@@ -160,7 +160,7 @@ class _DialogCategoriesListState extends State<DialogCategoriesList> {
                             MaterialPageRoute<void>(
                               builder: (BuildContext context) => EditCategory(
                                 tag: Category(
-                                  _categoriesList[index]['id_tag'],
+                                  _categoriesList[index]['idCategory'],
                                   _categoriesList[index]['name'],
                                   _categoriesList[index]['color'],
                                 ),

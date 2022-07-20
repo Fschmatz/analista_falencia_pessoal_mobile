@@ -9,9 +9,10 @@ class ExpenseDao {
   static const _databaseVersion = 1;
 
   static const table = 'expenses';
-  static const columnId = 'id_expense';
+  static const columnId = 'idExpense';
   static const columnName = 'name';
   static const columnValue = 'value';
+  static const columnDate = 'date';
 
   static Database? _database;
   Future<Database> get database async =>

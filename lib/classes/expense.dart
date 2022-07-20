@@ -1,7 +1,8 @@
 class Expense{
-  int id_expense;
+  int idExpense;
   String name;
   String value;
+  String date;
 
-  Expense(this.id_expense, this.name, this.value);
+  Expense(this.idExpense, this.name, this.value, this.date);
 }

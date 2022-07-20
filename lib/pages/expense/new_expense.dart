@@ -99,8 +99,8 @@ class _NewExpenseState extends State<NewExpense> {
               onEditingComplete: () => node.nextFocus(),
               decoration: InputDecoration(
                   helperText: "* Required",
-                  labelText: "Person name",
-                  errorText: validPersonName ? null : "Person name is empty"),
+                  labelText: "Name",
+                  errorText: validPersonName ? null : "Name is empty"),
             ),
           ),
           Padding(

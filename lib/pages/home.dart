@@ -1,6 +1,6 @@
+import 'package:analista_falencia_pessoal/pages/category/categories_manager.dart';
 import 'package:analista_falencia_pessoal/pages/expense_list_page.dart';
 import 'package:analista_falencia_pessoal/pages/statistics_page.dart';
-import 'package:analista_falencia_pessoal/pages/tags/tags_manager.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,25 +17,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<Widget> _tabs = [];
+  final List<Widget> _tabs = [
+    ExpenseListPage(
+      key: UniqueKey(),
+    ),
+    StatisticsPage(
+      key: UniqueKey(),
+    ),
+  ];
   BottomNavigationController bottomNavigationController =
       Get.put(BottomNavigationController());
 
   @override
   void initState() {
     super.initState();
-    appStartFunctions();
+   // appStartFunctions();
   }
 
   void appStartFunctions() async {
-    _tabs = [
-      ExpenseListPage(
-        key: UniqueKey(),
-      ),
-      StatisticsPage(
-        key: UniqueKey(),
-      ),
-    ];
   }
 
   @override
@@ -56,13 +55,13 @@ class _HomeState extends State<Home> {
                     itemBuilder: (BuildContext context) =>
                     <PopupMenuItem<int>>[
                       const PopupMenuItem<int>(
-                          value: 0, child: Text('Manage tags')),
+                          value: 0, child: Text('Manage categories')),
                       const PopupMenuItem<int>(
                           value: 1, child: Text('Settings')),
                     ],
                     onSelected: (int value) {
                       if (value == 0) {
-                        Get.to(() => TagsManager());
+                        Get.to(() => CategoriesManager());
                       } else if (value == 1) {
                         Get.to(() => Settings());
 
