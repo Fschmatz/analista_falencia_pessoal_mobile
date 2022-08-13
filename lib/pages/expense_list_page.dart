@@ -73,7 +73,6 @@ class _ExpenseListPageState extends State<ExpenseListPage> {
           },
           child: const Icon(
             Icons.add,
-            color: Colors.black87,
           ),
         ));
   }

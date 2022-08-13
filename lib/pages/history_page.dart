@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class StatisticsPage extends StatefulWidget {
-  const StatisticsPage({Key? key}) : super(key: key);
+class HistoryPage extends StatefulWidget {
+  const HistoryPage({Key? key}) : super(key: key);
 
   @override
-  _StatisticsPageState createState() => _StatisticsPageState();
+  _HistoryPageState createState() => _HistoryPageState();
 }
 
-class _StatisticsPageState extends State<StatisticsPage> {
+class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     return Center(child: Text('''

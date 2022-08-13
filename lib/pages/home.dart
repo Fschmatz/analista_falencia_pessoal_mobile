@@ -1,6 +1,6 @@
 import 'package:analista_falencia_pessoal/pages/category/categories_manager.dart';
 import 'package:analista_falencia_pessoal/pages/expense_list_page.dart';
-import 'package:analista_falencia_pessoal/pages/statistics_page.dart';
+import 'package:analista_falencia_pessoal/pages/history_page.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
     ExpenseListPage(
       key: UniqueKey(),
     ),
-    StatisticsPage(
+    HistoryPage(
       key: UniqueKey(),
     ),
   ];
@@ -31,11 +31,10 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-   // appStartFunctions();
+    // appStartFunctions();
   }
 
-  void appStartFunctions() async {
-  }
+  void appStartFunctions() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -49,27 +48,25 @@ class _HomeState extends State<Home> {
               floating: true,
               snap: true,
               actions: [
-
-                PopupMenuButton<int>(
-                    icon: const Icon(Icons.more_vert_outlined),
-                    itemBuilder: (BuildContext context) =>
-                    <PopupMenuItem<int>>[
-                      const PopupMenuItem<int>(
-                          value: 0, child: Text('Manage categories')),
-                      const PopupMenuItem<int>(
-                          value: 1, child: Text('Settings')),
-                    ],
-                    onSelected: (int value) {
-                      if (value == 0) {
-                        Get.to(() => CategoriesManager());
-                      } else if (value == 1) {
-                        Get.to(() => Settings());
-
-                      }
-                    })
-
-
-
+                Theme(
+                  data: Theme.of(context).copyWith(useMaterial3: false),
+                  child: PopupMenuButton<int>(
+                      icon: const Icon(Icons.more_vert_outlined),
+                      itemBuilder: (BuildContext context) =>
+                          <PopupMenuItem<int>>[
+                            const PopupMenuItem<int>(
+                                value: 0, child: Text('Categories')),
+                            const PopupMenuItem<int>(
+                                value: 1, child: Text('Settings')),
+                          ],
+                      onSelected: (int value) {
+                        if (value == 0) {
+                          Get.to(() => CategoriesManager());
+                        } else if (value == 1) {
+                          Get.to(() => Settings());
+                        }
+                      }),
+                )
               ],
             ),
           ];
@@ -98,17 +95,15 @@ class _HomeState extends State<Home> {
               icon: Icon(Icons.payments_outlined),
               selectedIcon: Icon(
                 Icons.payments,
-                color: Colors.black87,
               ),
               label: 'Month Expenses',
             ),
             NavigationDestination(
-              icon: Icon(Icons.assessment_outlined),
+              icon: Icon(Icons.history_outlined),
               selectedIcon: Icon(
-                Icons.assessment,
-                color: Colors.black87,
+                Icons.history,
               ),
-              label: 'Statistics',
+              label: 'History',
             ),
           ],
         ),

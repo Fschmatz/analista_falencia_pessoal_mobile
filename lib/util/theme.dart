@@ -12,10 +12,10 @@ ThemeData light = ThemeData(
     colorScheme: const ColorScheme.light(
       background: Color(0xFFF0F2F2),
       primary: Color(0xFF3D6BAC),
+      onPrimary: Color(0xFF0D1D29),
       secondary: Color(0xFF3D6BAC),
     ),
     popupMenuTheme: const PopupMenuThemeData(
-      elevation: 1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(4)),
       ),
@@ -33,7 +33,7 @@ ThemeData light = ThemeData(
       backgroundColor: Color(0xFFFDFFFF),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: Color(0xFF3D6BAC),
+      backgroundColor: Color(0xFFD5E4F6),
     ),
     inputDecorationTheme: InputDecorationTheme(
         focusColor: const Color(0xFF3D6BAC),
@@ -41,38 +41,30 @@ ThemeData light = ThemeData(
           borderSide: const BorderSide(
             color: Color(0xFF3D6BAC),
           ),
-          borderRadius: BorderRadius.circular(4.0),
+          borderRadius: BorderRadius.circular(8.0),
         ),
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.grey.shade600,
+            borderSide: const BorderSide(
+              color: Color(0xFF74777F),
             ),
-            borderRadius: BorderRadius.circular(4.0)),
+            borderRadius: BorderRadius.circular(8.0)),
         border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.grey.shade600,
+            borderSide: const BorderSide(
+              color:  Color(0xFF74777F),
             ),
-            borderRadius: BorderRadius.circular(4.0))),
+            borderRadius: BorderRadius.circular(8.0))),
     bottomAppBarColor: const Color(0xFFF0F2F2),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      selectedIconTheme: IconThemeData(
-        color: Color(0xFF3D6BAC),
-      ),
-      selectedLabelStyle: TextStyle(
-        color: Color(0xFF3D6BAC),
-      ),
-      showSelectedLabels: true,
-      showUnselectedLabels: false,
       backgroundColor: Color(0xFFF0F2F2),
     ),
     navigationBarTheme: NavigationBarThemeData(
         backgroundColor: const Color(0xFFF0F2F2),
-        indicatorColor: const Color(0xFF3D6BAC),
+        indicatorColor: const Color(0xFFD5E4F6),
         iconTheme: MaterialStateProperty.all(const IconThemeData(
-          color: Color(0xFF050505),
+          color: Color(0xFF0D1D29),
         )),
         labelTextStyle: MaterialStateProperty.all(const TextStyle(
-            color: Color(0xFF050505), fontWeight: FontWeight.w500))),
+            color: Color(0xFF0D1D29), fontWeight: FontWeight.w500))),
     bottomSheetTheme:
         const BottomSheetThemeData(modalBackgroundColor: Color(0xFFF0F2F2)));
 
@@ -82,30 +74,30 @@ ThemeData dark = ThemeData(
       titleMedium: TextStyle(fontWeight: FontWeight.w400),
     ),
     brightness: Brightness.dark,
-    primaryColor: const Color(0xFF1A1B1F),
-    scaffoldBackgroundColor: const Color(0xFF1A1B1F),
-    canvasColor: const Color(0xFF1A1B1F),
+    primaryColor: const Color(0xFF1B1B1D),
+    scaffoldBackgroundColor: const Color(0xFF1B1B1D),
+    canvasColor: const Color(0xFF1B1B1D),
     colorScheme: const ColorScheme.dark(
-        background: Color(0xFF1A1B1F),
+        background: Color(0xFF1B1B1D),
         primary: Color(0xFFA8C7FF),
+        onPrimary: Color(0xFFD5E4F6),
         secondary: Color(0xFFA8C7FF)),
     popupMenuTheme: const PopupMenuThemeData(
-      elevation: 1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(4)),
       ),
-      color: Color(0xFF303136),
+      color: Color(0xFF323234),
     ),
     appBarTheme: const AppBarTheme(
-      surfaceTintColor: Color(0xFF1A1B1F),
-      color: Color(0xFF1A1B1F),
+      surfaceTintColor: Color(0xFF1B1B1D),
+      color: Color(0xFF1B1B1D),
     ),
     cardTheme: const CardTheme(
-      surfaceTintColor: Color(0xFF292A2F),
-      color: Color(0xFF292A2F),
+      surfaceTintColor: Color(0xFF2B2B2D),
+      color: Color(0xFF2B2B2D),
     ),
     dialogTheme: const DialogTheme(
-      backgroundColor: Color(0xFF1A1B1F),
+      backgroundColor: Color(0xFF1B1B1D),
     ),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFF353537),
@@ -113,36 +105,33 @@ ThemeData dark = ThemeData(
           borderSide: const BorderSide(
             color: Color(0xFFA8C7FF),
           ),
-          borderRadius: BorderRadius.circular(4.0),
+          borderRadius: BorderRadius.circular(8.0),
         ),
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.grey.shade600,
+            borderSide: const BorderSide(
+              color: Color(0xFF8D9099),
             ),
-            borderRadius: BorderRadius.circular(4.0)),
+            borderRadius: BorderRadius.circular(8.0)),
         border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.grey.shade600,
+            borderSide: const BorderSide(
+              color: Color(0xFF8D9099),
             ),
-            borderRadius: BorderRadius.circular(4.0))),
+            borderRadius: BorderRadius.circular(8.0))),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      selectedIconTheme: IconThemeData(color: Color(0xFFA8C7FF)),
-      selectedLabelStyle: TextStyle(color: Color(0xFFA8C7FF)),
-      showSelectedLabels: true,
-      showUnselectedLabels: false,
-      backgroundColor: Color(0xFF1A1B1F),
+
+      backgroundColor: Color(0xFF1B1B1D),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: Color(0xFFA8C7FF),
+      backgroundColor: Color(0xFF3A5470),
     ),
     navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: const Color(0xFF1A1B1F),
-        indicatorColor: const Color(0xFFA8C7FF),
+        backgroundColor: const Color(0xFF1B1B1D),
+        indicatorColor: const Color(0xFF394757),
         iconTheme: MaterialStateProperty.all(const IconThemeData(
-          color: Color(0xFFEAEAEA),
+          color: Color(0xFFD5E4F6),
         )),
         labelTextStyle: MaterialStateProperty.all(const TextStyle(
-            color: Color(0xFFEAEAEA), fontWeight: FontWeight.w500))),
-    bottomAppBarColor: const Color(0xFF1A1B1F),
+            color: Color(0xFFD5E4F6), fontWeight: FontWeight.w500))),
+    bottomAppBarColor: const Color(0xFF1B1B1D),
     bottomSheetTheme:
-        const BottomSheetThemeData(modalBackgroundColor: Color(0xFF1A1B1F)));
+        const BottomSheetThemeData(modalBackgroundColor: Color(0xFF1B1B1D)));

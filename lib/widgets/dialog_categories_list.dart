@@ -159,11 +159,11 @@ class _DialogCategoriesListState extends State<DialogCategoriesList> {
                             context,
                             MaterialPageRoute<void>(
                               builder: (BuildContext context) => EditCategory(
-                                tag: Category(
+                               /* tag: Category(
                                   _categoriesList[index]['idCategory'],
                                   _categoriesList[index]['name'],
                                   _categoriesList[index]['color'],
-                                ),
+                                ),*/
                               ),
                               fullscreenDialog: true,
                             )).then((value) => getCategories());

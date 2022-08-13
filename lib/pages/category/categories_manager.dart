@@ -1,4 +1,6 @@
+import 'package:analista_falencia_pessoal/pages/category/new_category.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../util/utils_functions.dart';
 
 class CategoriesManager extends StatefulWidget {
@@ -62,7 +64,7 @@ class _CategoriesManagerState extends State<CategoriesManager> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Manage Tags"),
+        title: const Text("Manage Categories"),
       ),
       body: ListView.separated(
         separatorBuilder: (BuildContext context, int index) => const Divider(),
@@ -115,13 +117,10 @@ class _CategoriesManagerState extends State<CategoriesManager> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        heroTag: null,
         onPressed: () {
-        /*  Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (BuildContext context) => const NewTag(),
-              )).then((value) => getTags());*/
+          Get.to(
+                () => const NewCategory(),
+          );
         },
         child: Icon(
           Icons.add_outlined,

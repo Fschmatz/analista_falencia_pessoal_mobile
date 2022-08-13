@@ -45,7 +45,7 @@ class _SettingsState extends State<Settings> {
                 title: Text(
                   "${AppDetails.appName} ${AppDetails.appVersion}",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 16, color: Colors.black87),
+                  style: const TextStyle(fontSize: 14, color: Colors.black87),
                 ),
               ),
             ),

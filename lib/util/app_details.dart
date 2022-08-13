@@ -1,16 +1,21 @@
 class AppDetails{
 
-  static String appVersion = "0.5.0";
+  static String appVersion = "0.6.0";
   static String appName = "Analista de Falência Pessoal Fschmatz";
   static String repositoryLink = "https://github.com/Fschmatz/analista_falencia_pessoal_mobile";
 
   static String changelogCurrent = '''
-0.5.0
-- DB Creator
-- Home
+0.6.0
+- UI
+- Categories
+- History
 ''';
 
   static String changelogsOld = '''
+0.5.0
+- DB Creator
+- Home
+
 0.4.0
 - Get State Management
 - Animations

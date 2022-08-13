@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../db/category_dao.dart';
+import 'package:get/get.dart';
 import '../../util/block_picker_alt.dart';
-import '../../widgets/dialog_alert_error.dart';
 
 class NewCategory extends StatefulWidget {
   @override
@@ -12,28 +11,26 @@ class NewCategory extends StatefulWidget {
 }
 
 class _NewCategoryState extends State<NewCategory> {
-
-  final _categories = CategoryDao.instance;
   TextEditingController customControllerName = TextEditingController();
   Color pickerColor = const Color(0xFFe35b5b);
   Color currentColor = const Color(0xFFe35b5b);
+  RxBool _validName = true.obs;
 
-  void _saveTag() async {
-    Map<String, dynamic> row = {
-      CategoryDao.columnName: customControllerName.text,
-      CategoryDao.columnColor: currentColor.toString(),
-    };
-    final id = await _categories.insert(row);
-  }
+  /*Future<void> _saveTag() async {
+    saveTag(Tag(
+      null,
+      customControllerName.text,
+      currentColor.toString(),
+    ));
+  }*/
 
-  String checkForErrors() {
-    String errors = "";
+  bool validateTextFields() {
     if (customControllerName.text.isEmpty) {
-      errors += "Name is empty\n";
+      _validName.value = false;
+      return false;
     }
-    return errors;
+    return true;
   }
-
 
   //COLORS
   void changeColor(Color color) {
@@ -44,28 +41,21 @@ class _NewCategoryState extends State<NewCategory> {
     Widget okButton = TextButton(
       child: const Text(
         "Ok",
-        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
       ),
       onPressed: () {
-        setState(() =>
-            {currentColor = pickerColor});
+        setState(() => {currentColor = pickerColor});
         Navigator.of(context).pop();
       },
     );
-
     AlertDialog alert = AlertDialog(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-      ),
       title: const Text(
-        "Select Color : ", //
-        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        "Select Color:",
       ),
       content: SingleChildScrollView(
           child: BlockPicker(
-        pickerColor: currentColor,
-        onColorChanged: changeColor,
-      )),
+            pickerColor: currentColor,
+            onColorChanged: changeColor,
+          )),
       actions: [
         okButton,
       ],
@@ -83,93 +73,69 @@ class _NewCategoryState extends State<NewCategory> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-            child: IconButton(
-              tooltip: 'Save',
-              icon: const Icon(
-                Icons.save_outlined,
-              ),
-              onPressed: () async {
-                String errors = checkForErrors();
-                if (errors.isEmpty) {
-                  _saveTag();
-                  Navigator.of(context).pop();
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return  dialogAlertErrors(errors,context);
-                    },
-                  );
-                }
-              },
+          IconButton(
+            tooltip: 'Save',
+            icon: const Icon(
+              Icons.save_outlined,
             ),
+            onPressed: () async {
+              if (validateTextFields()) {
+               // _saveTag();
+                Navigator.of(context).pop();
+              }
+            },
           )
         ],
         title: const Text('New Tag'),
       ),
-      body: ListView(
-        children: [
-          ListTile(
-            leading: const SizedBox(
-              height: 0.1,
-            ),
-            title: Text("Name".toUpperCase(),
-                style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700,
-                    color: Theme.of(context).colorScheme.secondary)),
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.notes_outlined,
-            ),
-            title: TextField(
-              autofocus: true,
-              minLines: 1,
-              maxLength: 30,
-              maxLengthEnforcement: MaxLengthEnforcement.enforced,
-              controller: customControllerName,
-              textCapitalization: TextCapitalization.sentences,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                counterText: "",
-                helperText: "* Required",
-              ),
-              style: const TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ),
-          ListTile(
-            leading: const SizedBox(
-              height: 0.1,
-            ),
-            title: Text("Color".toUpperCase(),
-                style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700,
-                    color: Theme.of(context).colorScheme.secondary)),
-          ),
-          ListTile(
-            leading: const Icon(Icons.colorize_outlined),
-            title: OutlinedButton(
-                onPressed: () {
-                  createAlertSelectColor(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(100, 50),
-                  elevation: 0,
-                  primary: currentColor,
-                  onPrimary: currentColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
+      body: Obx(
+              () =>
+         ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: TextField(
+                autofocus: true,
+                minLines: 1,
+                maxLength: 30,
+                maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                controller: customControllerName,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: InputDecoration(
+                    labelText: "Name",
+                    counterText: "",
+                    helperText: "* Required",
+                    errorText: _validName.value ?  null : "Name is empty"
                 ),
-                child: const SizedBox.shrink()),
-          ),
-        ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 16, 5),
+              child: Text('Color',
+                style: TextStyle(
+                    fontSize: 14,
+                    color: Theme.of(context).textTheme.headline1!.color
+                ),
+              ),
+            ),
+            ListTile(
+              title: OutlinedButton(
+                  onPressed: () {
+                    createAlertSelectColor(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(100, 60),
+                    elevation: 0,
+                    primary: currentColor,
+                    onPrimary: currentColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  child: const SizedBox.shrink()),
+            ),
+          ],
+        ),
       ),
     );
   }
